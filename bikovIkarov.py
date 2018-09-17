@@ -34,7 +34,7 @@ def compare_numbers(n_to_guess, guess):
     Parameters
     ----------
     n_to_guess: list
-    guess:  list
+    guess:  list, has to have the same length as n_to_guess
 
     Returns
     -------
