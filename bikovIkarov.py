@@ -57,23 +57,19 @@ def compare_numbers(n_to_guess, guess):
 if __name__=="__main__":
 
     n_to_guess = unique_random_number_list()
-    print n_to_guess
+    print n_to_guess #TODO delete when done testing
     
     print "Guess the number (6 unique digits between 0-9)"
-    guess_int = raw_input()
-    guess = [int(x) for x in str(guess_int)]
-    print guess
-    karov, bikov = compare_numbers(n_to_guess, guess)
-    print "%i karov, %i bikov"%(karov, bikov)
-
-    count = 1
+    bikov = 0
+    count = 0
     while bikov != 6:
         count += 1
         print "Guess again!"
-        guess_int = input()
+        guess_int = raw_input()
         guess = map(int, str(guess_int))
+        #guess = [int(x) for x in str(guess_int)] # list comprehansion 
         karov, bikov = compare_numbers(n_to_guess, guess)
         print "%i karov, %i bikov"%(karov, bikov)
-    print "Congratulations! You guessed the number in %int tries"%(count)
+    print "Congratulations! You guessed the number in %i tries."%(count)
 
 
