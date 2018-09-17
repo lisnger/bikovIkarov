@@ -34,7 +34,7 @@ def compare_numbers(n_to_guess, guess):
     Parameters
     ----------
     n_to_guess: list
-    guess:  list
+    guess:  list, has to have the same length as n_to_guess
 
     Returns
     -------
@@ -57,23 +57,43 @@ def compare_numbers(n_to_guess, guess):
 if __name__=="__main__":
 
     n_to_guess = unique_random_number_list()
-    print n_to_guess
+    print n_to_guess #TODO delete when done testing
     
-    print "Guess the number (6 unique digits between 0-9)"
-    guess_int = raw_input()
-    guess = [int(x) for x in str(guess_int)]
-    print guess
-    karov, bikov = compare_numbers(n_to_guess, guess)
-    print "%i karov, %i bikov"%(karov, bikov)
+    print "How do you want to play?"
+    print "You guess the number provided by the computer, press: a"
+    print "You want the computer to guess your 6 digit number (must be unique between 0-9), press: b"
+    print "Do you want to play interactive? Press: c"
+    print "NOTE: only option a works right now, you can not choose the other two, haha"
+    option = raw_input()
 
-    count = 1
-    while bikov != 6:
-        count += 1
-        print "Guess again!"
-        guess_int = input()
-        guess = map(int, str(guess_int))
-        karov, bikov = compare_numbers(n_to_guess, guess)
-        print "%i karov, %i bikov"%(karov, bikov)
-    print "Congratulations! You guessed the number in %int tries"%(count)
+    if option == 'a':
+        print "Guess the number (6 unique digits between 0-9)"
+        bikov = 0
+        count = 0
+        while bikov != 6:
+            count += 1
+            print "Guess again!"
+            guess_int = raw_input()
+            guess = map(int, str(guess_int))
+            #guess = [int(x) for x in str(guess_int)] # list comprehansion 
+            karov, bikov = compare_numbers(n_to_guess, guess)
+            print "%i karov, %i bikov"%(karov, bikov)
+        print "Congratulations! You guessed the number in %i tries."%(count)
+
+    elif option == 'b':
+        print "The computer will try to guess your unique 6 digit number."
+        print "It will provide you with a first guess, for example: 012345"
+        print "You have to prove it then with two numbers."
+        print "The first number will be called 'karov'i"
+        print "it is the amount of digits which the computers number and yours have in common without the ones excluding stand at the correct place"
+        print "the second number is called bikov, this is the amount of numbers at the correct place."
+
+        out = unique_random_number_list()
+        print "Is your number: %i"%(out)
+        print "If this is your number press: a"
+        print "Otherwise, how many karov did I get?"
+        karov = raw_input()
+        print "How many bikov did I get?"
+        bikov = raw_input()
 
 
