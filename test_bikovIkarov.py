@@ -4,13 +4,20 @@
 import pytest
 import bikovIkarov as bik
 import numpy as np
+import mock
 
 def test_unique_random_number_list():
+    '''
+    Compares if the length of the list ar is the same as the uniqe set of ar.
+    '''
     ar = bik.unique_random_number_list()
     uar = set(ar)
     assert len(ar) == len(uar)
 
 def test_compare_numbers():
+    '''
+    Takes example data and known results and compares if function returns expected results.
+    '''
     a = [3,5,1,9,8,0]
     b = [1,2,3,4,8,6]
     same_ab = 2
@@ -18,5 +25,13 @@ def test_compare_numbers():
     same, correct = bik.compare_numbers(n_to_guess=a, guess=b)
     assert same == same_ab
     assert correct == correct_ab
+
+#TODO find a better way to test that function
+#def test_human_guess_number():
+#    with mock.patch.object(__builtin__, 'raw_input', lambda: '12345'):
+#        assert bik.human_guess_number() == 'The number has to have exactly 6 digits. Try again.'
+#    
+#    #bik.raw_input = lambda: '123456'
+    
 
 
