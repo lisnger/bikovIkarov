@@ -1,4 +1,5 @@
 [
   "test_bikovIkarov.py::test_unique_random_number_list", 
-  "test_bikovIkarov.py::test_compare_numbers"
+  "test_bikovIkarov.py::test_compare_numbers", 
+  "test_bikovIkarov.py::test_save_data"
 ]
