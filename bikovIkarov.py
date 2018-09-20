@@ -1,7 +1,6 @@
 #! usr/bin/enrandomv python
 # -*- coding: utf-8 -*-
 
-
 import numpy as np
 import random
 
@@ -55,21 +54,24 @@ def compare_numbers(n_to_guess, guess):
     return same, correct
 
 
-def save_data(n_to_guess_string, guess_list, karov_list, bikov_list):
+def save_data(n_to_guess_string, guess_list, karov_list, bikov_list, file_name='no'):
     import csv
     import datetime
 
     time = str(datetime.datetime.now())
     # replace space with _
-    time_str = '_'.join(time[:10], time[11:])
-    file_name = 'data/game_%s.txt'%((time))
+    time_str = '_'.join((time[:10], time[11:]))
+    if file_name == 'no':
+        file_name = 'data/game_%s.txt'%((time_str))
+    else:
+        file_name = 'data/' + file_name + '.txt'
     data_file = open(file_name, 'wt')
 
     try:
         writer = csv.writer(data_file)
-        writer.writerow((n_to_guess, 'karov', 'bikov'))
+        writer.writerow((n_to_guess_string, 'karov', 'bikov'))
         for i in xrange(len(guess_list)):
-            writer.writerow( guess_list[i], karov_list, bikov_list  )
+            writer.writerow( (guess_list[i], karov_list[i], bikov_list[i]) )
     finally:
         data_file.close() 
 
@@ -98,7 +100,7 @@ def human_guess_number():
     n_to_guess = unique_random_number_list()
     # converting list of numbers to string for later saving
     n_to_guess_string = ''.join([str(i) for i in n_to_guess])
-    #print n_to_guess #TODO delete when done testing
+    print n_to_guess #TODO delete when done testing
 
     bikov = 0
     count = 0
@@ -155,17 +157,21 @@ if __name__=="__main__":
     #print "NOTE: only option a works right now, you can not choose the other two, haha"
     #option = raw_input()
     
-    print "Do you want to save the game? options: yes, no"
-    save = raw_input()
 
     option = 'a'
     if option == 'a':
         n_to_guess_string, guess_list, karov_list, bikov_list = human_guess_number()
+        print "Do you want to save the game? options: 'yes', 'no'"
+        save = raw_input()
         if save == 'yes': 
+            print "Do you want to give the game a special name? options: *type_in_your_name*, 'no'"
+            print "If you select 'no', then the game will be saved as game_*current_time*"
+            file_name = raw_input()
             save_data(  n_to_guess_string = n_to_guess_string, 
                         guess_list = guess_list, 
                         karov_list = karov_list, 
-                        bikov_list = bikov_list)
+                        bikov_list = bikov_list,
+                        file_name  = file_name)
 
     elif option == 'b':
         print "The computer will try to guess your unique 6 digit number."
